@@ -4,6 +4,7 @@ import styled from "styled-components"
 import ProductImage from './ProductImage'
 import ProductName from './ProductName';
 import ProductPrice from './ProductPrice';
+import ProductDetail from './../../pages/ProductDetail';
 
 const ProductItem = styled.li`
     position: relative;
@@ -13,10 +14,10 @@ const ProductItem = styled.li`
 `
 
 export default function Card({item}) {
-  const itemUrl = `/detail/${item.id}`
+  // const itemUrl = `/detail/${item.id}`
 
   return (
-    <Link to={itemUrl}>
+    <Link to={`/detail/${item.id}`}>
     <ProductItem>
         <ProductImage item={item}/>
         <ProductName item={item}/>

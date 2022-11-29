@@ -90,10 +90,9 @@ button {
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-  <BrowserRouter>
+    <>
   {/* reset.css를 root에 적용해서 모든 파일에 적용 */}
-    
     <GlobalStyle /> 
     <App tab="home" />
-  </BrowserRouter>
+    </>
 );

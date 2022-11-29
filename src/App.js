@@ -1,6 +1,6 @@
 import HomePage from './pages/HomePage';
 import CartPage from './pages/CartPage';
-import { Routes,Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import ProductDetail from './pages/ProductDetail';
 import { useContext, useEffect, useState } from 'react';
 // import { callAPIData } from './db/callAPI';
@@ -25,12 +25,14 @@ useEffect(()=>{
   console.log(loadData)
 
   return (
-    
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Routes>
       <Route path='/' element={<HomePage data={loadData}/>}></Route>
       <Route path='/cart' element={<CartPage/>}></Route>
       <Route path='/detail/:id' element={<ProductDetail data={loadData}/>}></Route>
     </Routes>
+  </BrowserRouter>
+
   );
 }
 export default App;

@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react'
-import {callAPIData} from './../db/callAPI';
+import React from 'react'
 import styled from "styled-components"
 import Card from '../components/card/Card';
-import CartPage from './CartPage';
-import { Link, Route, Routes } from 'react-router-dom';
-import ProductDetail from './ProductDetail';
+import { Link} from 'react-router-dom';
+import shoppingCart from '../assets/images/icon-shopping-cart-white.svg'
+
 
 const Product = styled.main`
     display: flex;
@@ -21,14 +20,13 @@ const ProductList = styled.ul`
 `
 
 const CartBtn = styled.button`
-    background: var(--main-color) url(../assets/images/icon-shopping-cart-white.svg) no-repeat center / 40px 40px;
+    background: var(--main-color) url(${shoppingCart}) no-repeat left 18px center / 40px 40px;
     position: fixed;
-    bottom: 60px;
-    right: 60px;
+    bottom: 40px;
+    right: 40px;
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    z-index:2;
 `
 
 export default function HomePage(props) {
@@ -48,9 +46,8 @@ export default function HomePage(props) {
             <>
                 <ProductList>
                     {loadData.map(item=><Card key={item.id} {...{item}}/>)}
+                    {/* {console.log(loadData)} */}
                 </ProductList>
-                
-
             </>
             :
             <div>이상한 페이지 옴</div>

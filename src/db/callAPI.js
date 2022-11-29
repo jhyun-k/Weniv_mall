@@ -8,7 +8,7 @@ import { createContext } from 'react'
 
 
 async function callAPI  () {
-    const res = await fetch(`http://35.76.53.28:8080/mall`)
+    const res = await fetch(`https://test.api.weniv.co.kr/mall`)
     const result = await res.json()
     return result 
     

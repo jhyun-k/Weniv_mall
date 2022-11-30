@@ -98,21 +98,14 @@ const Buttons = styled.div`
     background: url(${shoppingCart}) no-repeat center / 30px 30px;
   }
 `;
-const HeartOff = styled.button`
-  width: 60px;
-  height: 60px;
-  background-color: transparent;
-  border: 1px solid #bdbdbd;
-  border-radius: 5px;
-  background: url(${heartOff}) no-repeat center / 30px 30px;
-`;
 const HeartOn = styled.button`
   width: 60px;
   height: 60px;
   background-color: transparent;
   border: 1px solid #bdbdbd;
   border-radius: 5px;
-  background: url(${heartOn}) no-repeat center / 30px 30px;
+  background: url(${(props) => (props.state ? heartOn : heartOff)}) no-repeat
+    center / 30px 30px;
 `;
 const DetailInfo = styled.div`
   display: flex;
@@ -130,9 +123,8 @@ export default function ProductDetail(props) {
 
   const [heart, setHeart] = useState(0);
 
-  const heartOn = (e) => {
-    heart === 0 ? setHeart(1) : setHeart(0);
-    e.preventDefault();
+  const ToggleHeart = () => {
+    setHeart((prev) => !prev);
   };
   console.log(loadData);
 
@@ -171,11 +163,7 @@ export default function ProductDetail(props) {
               <Buttons>
                 <button className="buy">바로구매</button>
                 <button className="cart"></button>
-                {heart === 0 ? (
-                  <HeartOff onClick={heartOn} />
-                ) : (
-                  <HeartOn onClick={heartOn} />
-                )}
+                <HeartOn onClick={ToggleHeart} state={heart} />
               </Buttons>
             </ContainRight>
           </Container>

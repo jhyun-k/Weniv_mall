@@ -27,6 +27,7 @@ const CartBtn = styled.button`
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  z-index: 2;
 `;
 
 export default function HomePage(props) {

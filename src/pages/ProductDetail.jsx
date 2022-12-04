@@ -123,17 +123,31 @@ export default function ProductDetail(props) {
 
   const [heart, setHeart] = useState(0);
 
+  const [cartAdd, setCartAdd] = useState(false);
+
+  const onAddCart = (item) => {
+    props.changeCart(item);
+    /* {
+      item: loadData.productName,
+      price: loadData.price,} */
+    setCartAdd(true);
+  };
+
   const ToggleHeart = () => {
     setHeart((prev) => !prev);
   };
   console.log(loadData);
 
-  const [count, setCount] = useState(0);
-  const onIncrease = () => {
-    setCount((prevCount) => prevCount + 1);
-  };
-  const onDecrease = () => {
-    setCount((prevCount) => prevCount - 1);
+  const [count, setCount] = useState(1);
+
+  const onCounter = (type) => {
+    if (type === 'plus') {
+      setCount((prev) => prev + 1);
+    } else if (type === 'minus') {
+      if (count > 1) {
+        setCount((prev) => prev - 1);
+      }
+    }
   };
 
   return (
@@ -149,9 +163,21 @@ export default function ProductDetail(props) {
               <Price>{loadData.price}원</Price>
               <p>택배배송/무료배송</p>
               <Counter>
-                <button onClick={onDecrease}>-</button>
+                <button
+                  onClick={() => {
+                    onCounter('minus');
+                  }}
+                >
+                  -
+                </button>
                 <h1>{count}</h1>
-                <button onClick={onIncrease}>+</button>
+                <button
+                  onClick={() => {
+                    onCounter('plus');
+                  }}
+                >
+                  +
+                </button>
               </Counter>
               <PriceCont>
                 <h3>총 상품금액</h3>
@@ -160,10 +186,19 @@ export default function ProductDetail(props) {
                   <span className="total">{loadData.price * count} </span>원
                 </div>
               </PriceCont>
-              <Buttons>
+              <Buttons cartState={cartAdd}>
                 <button className="buy">바로구매</button>
-                <button className="cart"></button>
+                <button
+                  className="cart"
+                  onClick={() =>
+                    onAddCart({
+                      item: loadData.productName,
+                      price: loadData.price,
+                    })
+                  }
+                ></button>
                 <HeartOn onClick={ToggleHeart} state={heart} />
+                <span>{cartAdd ? 'cart들어감' : ''}</span>
               </Buttons>
             </ContainRight>
           </Container>
